@@ -1,0 +1,62 @@
+[gd_scene load_steps=6 format=3 uid="uid://dgcoonqkqqwxs"]
+
+[ext_resource type="Texture2D" uid="uid://djhiqravklflo" path="res://Sprout Lands - Sprites - Basic pack/Characters/Basic Charakter Spritesheet.png" id="1_4vc6i"]
+[ext_resource type="Script" path="res://Levels/player.gd" id="1_h2piu"]
+
+[sub_resource type="Animation" id="Animation_hfxmc"]
+resource_name = "停止"
+length = 0.3
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [10, 11, 9]
+}
+
+[sub_resource type="Animation" id="Animation_wppb4"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ewyxj"]
+_data = {
+"RESET": SubResource("Animation_wppb4"),
+"walk_right": SubResource("Animation_hfxmc")
+}
+
+[node name="CharacterBody2D" type="CharacterBody2D"]
+position = Vector2(443, 286)
+script = ExtResource("1_h2piu")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_4vc6i")
+hframes = 4
+vframes = 4
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+visible = false
+polygon = PackedVector2Array(-5, -7, -2, -7, -2, -5, 2, -5, 2, -7, 5, -7, 5, 5, 3, 5, 3, 7, 1, 7, 1, 6, -1, 6, -1, 7, -3, 7, -3, 5, -5, 5)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_ewyxj")
+}
+
+[node name="AnimationPlayer2" type="AnimationTree" parent="."]
