@@ -6,3 +6,4 @@
 
 [node name="CharacterBody2D" parent="." instance=ExtResource("1_qs80v")]
 position = Vector2(291, 282)
+scale = Vector2(2, 2)
